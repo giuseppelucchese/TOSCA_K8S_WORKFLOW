@@ -1,5 +1,4 @@
-# TOSCA-K8S-WORKFLOW-DP
-Master's Degree Thesis Project
+# TOSCA-K8S-WORKFLOW  REDIS Case Study
 
 - Execute the following command in order to parse the TOSCA service template into K8S format:
 
@@ -10,5 +9,5 @@ puccini-tosca compile ./Examples/example_workflow.yaml --exec=https://raw.github
 - Execute the following command  to generate bpmn:
 
 ```
- puccini-tosca compile task_workflow.yaml | puccini-clout scriptlet exec bpmn.generate -o task_workflow.bpmn2
+ puccini-tosca compile tosca_task_workflow.yaml | puccini-clout scriptlet exec bpmn.generate -o task_workflow.bpmn
 ```
