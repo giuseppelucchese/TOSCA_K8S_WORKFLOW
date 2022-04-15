@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-wq
+  labels:
+    app: task-1
+  name: task-1-job
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - command: ["python" , "./producer.py"]
+          image: lccgiuseppe/redis-wq:2.6
+          name: task-1
+      restartPolicy: OnFailure

@@ -1,0 +1,176 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+
+  template_name: Task Workflow
+  template_author: Giuseppe Lucchese
+
+imports:
+
+- namespace_prefix: k8s
+  file: ./turandot/assets/tosca/profiles/kubernetes/1.0/profile.yaml
+
+- namespace_prefix: bpmn
+  file: ./puccini/examples/bpmn/profile/profile.yaml
+
+
+topology_template:
+
+  node_templates:
+
+    task-prod:
+      type: k8s:Task
+      capabilities:
+        metadata:
+          properties:
+            namespace: default
+            labels:
+              app: task-prod
+        job:
+          properties:
+            spec:
+              template:
+                spec:
+                  containers:
+                  - name: task-prod
+                    image: lccgiuseppe/redis-wq:2.8
+                    command:  ["python" , "./producer.py"]
+              
+    task-cons:
+      type: k8s:Task
+      capabilities:
+        metadata:
+          properties:
+            namespace: default
+            labels:
+              app: task-cons
+        job:
+          properties:
+            spec:
+              template:
+                spec:
+                  containers:
+                  - name: task-cons
+                    image: lccgiuseppe/redis-wq:2.8
+                    command:  ["python", "./consumer.py"]
+
+
+        
+  workflows:
+  
+    orchestration:
+  
+     steps:
+      create_task-prod-1:
+       target: task-prod
+       on_success:
+        - check_task-prod-1
+ 
+      check_task-prod-1:
+       target: task-prod
+       on_success:
+       - delete_task-prod-1
+
+      delete_task-prod-1:
+       target: task-prod
+       on_success:
+            - create_task-cons-1
+            - create_task-cons-2
+            - create_task-cons-3
+      
+      create_task-cons-1:
+       target: task-cons
+       on_success:
+            - check_task-cons-1
+            
+      check_task-cons-1:
+       target: task-cons
+       on_success:
+            - delete_task-cons-1
+
+
+      delete_task-cons-1:
+       target: task-cons
+       on_success:
+            - create_task-prod-2
+            - create_task-prod-3
+            
+            
+            
+      create_task-cons-2:
+       target: task-cons
+       on_success:
+            - check_task-cons-2
+            
+      check_task-cons-2:
+       target: task-cons
+       on_success:
+            - delete_task-cons-2
+
+
+      delete_task-cons-2:
+       target: task-cons
+
+
+   
+        
+      create_task-cons-3:
+       target: task-cons
+       on_success:
+            - check_task-cons-3
+            
+      check_task-cons-3:
+       target: task-cons
+       on_success:
+            - delete_task-cons-3
+     
+
+      delete_task-cons-3:
+       target: task-cons
+        
+        
+      create_task-prod-2:
+       target: task-prod
+       on_success:
+            - check_task-prod-2
+            
+      check_task-prod-2:
+       target: task-prod
+       on_success:
+            - delete_task-prod-2
+
+      delete_task-prod-2:
+       target: task-prod
+       on_success:
+            - create_task-cons-4
+        
+      create_task-prod-3:
+       target: task-prod
+       on_success:
+            - check_task-prod-2
+            
+      check_task-prod-3:
+       target: task-prod
+       on_success:
+            - delete_task-prod-2
+
+      delete_task-prod-3:
+       target: task-prod
+       on_success:
+            - create_task-cons-4 
+        
+      create_task-cons-4:
+       target: task-cons
+       on_success:
+            - check_task-cons-4
+            
+      check_task-cons-4:
+       target: task-cons
+       on_success:
+            - delete_task-cons-4
+
+
+      delete_task-cons-4:
+       target: task-cons
+        
+               
