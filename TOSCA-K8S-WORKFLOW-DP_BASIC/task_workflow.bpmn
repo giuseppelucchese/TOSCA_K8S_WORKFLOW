@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="definitions" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="_27mmufEfOOM6JI8iv1xG8aLcYyu" name="orchestration workflow" isExecutable="true">
+    <bpmn:serviceTask id="_27mmugpjmLPhAeMgQMFdEnJUY28" name="delete_task_2">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/delete_task?taskname=task-2</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmueC0LimAKxe4sFK0nJBNRcm" name="create_task_1">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/create_task?taskname=task-1</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmuk0Z5Yl65TWTihrsRNEqY1Z" name="check_task_1">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/check_task?taskname=task-1</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmuhdjenfHhNMplhF5gOtphJR" name="create_task_2">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/create_task?taskname=task-2</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmuebEMyiv4eB5maNXgRhvAoT" name="check_task_2">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/check_task?taskname=task-2</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmujOICMwVMHTzADD31wiz9la" name="delete_task_3">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/delete_task?taskname=task-3</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmueepjP0HowDowJmDrqJWw0T" name="create_task_3">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/create_task?taskname=task-3</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmuhyjC0D1BjXFJVZFjvcbDcn" name="check_task_3">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/check_task?taskname=task-3</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="_27mmueu2kMairNrXITZQdP2DdhT" name="delete_task_1">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">http://127.0.0.1:5000/delete_task?taskname=task-1</camunda:inputParameter>
+            <camunda:inputParameter name="method">GET</camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="_27mmusAwnUyzVlmHZC9X9BO3SFS" name="start"/>
+    <bpmn:endEvent id="_27mmunetWwIqR872ZDfEzIm0lwB" name="end">
+      <bpmn:terminateEventDefinition/>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="_27mmunod41rKTx9YNQzAjE3dQ4T" sourceRef="_27mmusAwnUyzVlmHZC9X9BO3SFS" targetRef="_27mmueC0LimAKxe4sFK0nJBNRcm"/>
+    <bpmn:sequenceFlow id="_27mmusXCMueqfzb4S9HVVWqTsZi" sourceRef="_27mmujOICMwVMHTzADD31wiz9la" targetRef="_27mmunetWwIqR872ZDfEzIm0lwB"/>
+    <bpmn:sequenceFlow id="_27mmurV9Wxv7tSGHr9FqL8Dsixm" sourceRef="_27mmugpjmLPhAeMgQMFdEnJUY28" targetRef="_27mmueepjP0HowDowJmDrqJWw0T"/>
+    <bpmn:sequenceFlow id="_27mmusfRZElthFLrkatwLsbfxqO" sourceRef="_27mmueC0LimAKxe4sFK0nJBNRcm" targetRef="_27mmuk0Z5Yl65TWTihrsRNEqY1Z"/>
+    <bpmn:sequenceFlow id="_27mmuoxhV07DPxYKY4hq7oMO7zm" sourceRef="_27mmuk0Z5Yl65TWTihrsRNEqY1Z" targetRef="_27mmueu2kMairNrXITZQdP2DdhT"/>
+    <bpmn:sequenceFlow id="_27mmuqS9Aw5bFlBQDEOw1DcJaBT" sourceRef="_27mmuhdjenfHhNMplhF5gOtphJR" targetRef="_27mmuebEMyiv4eB5maNXgRhvAoT"/>
+    <bpmn:sequenceFlow id="_27mmum6dIcYscR4xX4UlsxbLSMD" sourceRef="_27mmuebEMyiv4eB5maNXgRhvAoT" targetRef="_27mmugpjmLPhAeMgQMFdEnJUY28"/>
+    <bpmn:sequenceFlow id="_27mmumoUgP1mCO9Xxb2ebfeAyr4" sourceRef="_27mmueepjP0HowDowJmDrqJWw0T" targetRef="_27mmuhyjC0D1BjXFJVZFjvcbDcn"/>
+    <bpmn:sequenceFlow id="_27mmunWtDqkEEzzha0DiL27SZkW" sourceRef="_27mmuhyjC0D1BjXFJVZFjvcbDcn" targetRef="_27mmujOICMwVMHTzADD31wiz9la"/>
+    <bpmn:sequenceFlow id="_27mmurkzuOQIcNXuW42xWiQLsdX" sourceRef="_27mmueu2kMairNrXITZQdP2DdhT" targetRef="_27mmuhdjenfHhNMplhF5gOtphJR"/>
+  </bpmn:process>
+</bpmn:definitions>

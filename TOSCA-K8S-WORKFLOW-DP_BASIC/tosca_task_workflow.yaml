@@ -1,0 +1,196 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+metadata:
+
+  template_name: Task Workflow
+  template_author: Giuseppe Lucchese
+
+imports:
+
+- namespace_prefix: k8s
+  file: ./turandot/assets/tosca/profiles/kubernetes/1.0/profile.yaml
+
+- namespace_prefix: bpmn
+  file: ./puccini/examples/bpmn/profile/profile.yaml
+
+
+topology_template:
+
+  node_templates:
+
+    task-1:
+      type: k8s:Task
+      capabilities:
+        metadata:
+          properties:
+            namespace: default
+            labels:
+              app: task-1
+        job:
+          properties:
+            spec:
+              template:
+                spec:
+                  containers:
+                  - name: task-1
+                    image: busybox
+                    command:  ["echo", "Running a Task-1"]
+      
+      requirements:
+      - dependsOn: task-2
+      
+      interfaces:
+       Lifecycle:
+        inputs:
+         command: [" "]
+        operations:
+         create:
+          inputs:
+           command: ["kubectl apply task_1.yaml"]
+         check:
+          inputs:
+           command: ["kubectl describe task_1"]
+         delete:
+          inputs:
+           command: ["kubectl delete -f task_1"]
+        
+       
+        
+
+    task-2:
+      type: k8s:Task
+      capabilities:
+        metadata:
+          properties:
+            namespace: default
+            labels:
+              app: task-2
+        job:
+          properties:
+            spec:
+              template:
+                spec:
+                  containers:
+                  - name: task-2
+                    image: busybox
+                    command:  ["echo", "Running a Task-2"]
+      requirements:
+      - dependsOn: task-3
+      
+      interfaces:
+       Lifecycle:
+        inputs:
+         command: [" "]
+        operations:
+         create:
+          inputs:
+           command: ["kubectl apply task_2.yaml"]
+         check:
+          inputs:
+           command: ["kubectl describe task_2"]
+         delete:
+          inputs:
+           command: ["kubectl delete -f task_2"]
+      
+  
+        
+
+    task-3:
+      type: k8s:Task
+      capabilities:
+        metadata:
+          properties:
+            namespace: default
+            labels:
+              app: task-3
+        job:
+          properties:
+            spec:
+              template:
+                spec:
+                  containers:
+                  - name: task-3
+                    image: busybox
+                    command:  ["echo", "Running a Task-3"]
+      interfaces:
+       Lifecycle:
+        inputs:
+         command: [" "]
+        operations:
+         create:
+          inputs:
+           command: ["kubectl apply task_3.yaml"]
+         check:
+          inputs:
+           command: ["kubectl describe task_3"]
+         delete:
+          inputs:
+           command: ["kubectl delete -f task_3"]
+      
+        
+
+  workflows:
+  
+    orchestration:
+  
+      steps:
+        create_task_1:
+          target: task-1
+          activities: 
+          - call_operation: Lifecycle.create
+          on_success:
+            - check_task_1
+        
+        check_task_1:
+          target: task-1
+          activities:
+          - call_operation: Lifecycle.create
+          on_success:
+            - delete_task_1
+
+        delete_task_1:
+          target: task-1
+          activities:
+          - call_operation: Lifecycle.delete
+          on_success:
+            - create_task_2
+      
+        create_task_2:
+          target: task-2
+          activities:
+          - call_operation: Lifecycle.create
+          on_success:
+            - check_task_2
+
+        check_task_2:
+          target: task-2
+          activities:
+          - call_operation: Lifecycle.check
+          on_success:
+            - delete_task_2
+
+        delete_task_2:
+          target: task-2
+          activities:
+          - call_operation: Lifecycle.delete
+          on_success:
+            - create_task_3
+
+        create_task_3:
+          target: task-3
+          activities:
+          - call_operation: Lifecycle.create
+          on_success:
+            - check_task_3
+
+        check_task_3:
+          target: task-3
+          activities:
+          - call_operation: Lifecycle.check
+          on_success:
+            - delete_task_3
+ 
+        delete_task_3:
+          target: task-3
+          activities:
+          - call_operation: Lifecycle.delete
