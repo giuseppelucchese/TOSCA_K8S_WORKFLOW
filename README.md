@@ -15,7 +15,7 @@ generate.js :  https://github.com/tliron/puccini/tree/main/examples/bpmn/profile
 
 nodes.yaml and interfaces.yaml : https://github.com/tliron/turandot/tree/main/assets/tosca/profiles/kubernetes/1.0
 
-Staring Steps:
+Starting Steps:
 
 1. Start Camunda Platform
 2. Start Flask App 
